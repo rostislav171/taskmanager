@@ -1,0 +1,10 @@
+{% extends "tasks1/base.html" %}
+{% block content %}
+  <p><a href="{% url 'tasks1:task' task.id %}">{{ task }}</a></p>
+  <p>Добавить описание:</p>
+  <form action="{% url 'tasks1:new_entry' task.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name='submit'>Добавить описание</button>
+  </form>
+{% endblock content %}

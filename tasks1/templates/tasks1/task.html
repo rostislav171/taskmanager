@@ -1,0 +1,24 @@
+{% extends 'tasks1/base.html' %}
+{% block content %}
+  <p>Задание: {{ task }}</p>
+  <p>Описание:</p>
+  <p>
+    <a href="{% url 'tasks1:new_entry' task.id %}">Добавить описание</a>
+  </p>
+  <ul>
+  {% for entry in entries %}
+    <li>
+      <p>{{ entry.deadline|date:'M d, Y' }}</p>
+      <p>{{ entry.description|linebreaks }}</p>
+      {% if entry.status != True %}
+        <input type="checkbox" disabled /> <label>Не выполнено</label>
+      {% else %}
+        <input type="checkbox" disabled checked/> <label>Выполнено</label>
+      {% endif %}
+      <p>Приоритет задачи: --{{ entry.priority }}--</p>
+    </li>
+  {% empty %}
+    <li>Пока что нет никаких подзадач ¯\_(ツ)_/¯</li>
+  {% endfor %}
+  </ul>
+{% endblock content %}
