@@ -16,6 +16,9 @@
         <input type="checkbox" disabled checked/> <label>Выполнено</label>
       {% endif %}
       <p>Приоритет задачи: --{{ entry.priority }}--</p>
+      <p>
+            <a href="{% url 'tasks1:edit_entry' entry.id %}">Отредактировать</a>
+      </p>
     </li>
   {% empty %}
     <li>Пока что нет никаких подзадач ¯\_(ツ)_/¯</li>

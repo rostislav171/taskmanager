@@ -10,9 +10,10 @@ class TodoForm(forms.ModelForm):
 
 
 class EntryForm(forms.ModelForm):
-    priority_ch = forms.ChoiceField(choices=(("high", "High"), ("medium", "Medium"), ("low", "Low")))
 
     class Meta:
+
         model = Entry
-        fields = {}
-        labels = {}
+        fields = ['description', 'deadline', 'status', 'priority']
+        labels = {'description': 'Описание', 'deadline': 'Дедлайн', 'status': 'Статус', 'priority': 'Приоритет'}
+        widgets = {'description': forms.Textarea(attrs={'cols': 80}), 'deadline': forms.DateInput(attrs={'type': 'date'})}
