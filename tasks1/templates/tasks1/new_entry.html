@@ -1,10 +1,14 @@
 {% extends "tasks1/base.html" %}
 {% block content %}
-  <p><a href="{% url 'tasks1:task' task.id %}">{{ task }}</a></p>
-  <p>Добавить описание:</p>
-  <form action="{% url 'tasks1:new_entry' task.id %}" method='post'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name='submit'>Добавить описание</button>
-  </form>
+    <div class="row">
+        <div class="col-md-6">
+            <p><a href="{% url 'tasks1:task' task.id %}">{{ task }}</a></p>
+            <p>Добавить описание:</p>
+            <form action="{% url 'tasks1:new_entry' task.id %}" method='post'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Добавить описание</button>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

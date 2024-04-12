@@ -1,27 +1,31 @@
 {% extends 'tasks1/base.html' %}
 {% block content %}
-  <p>Задание: {{ task }}</p>
-  <p>Описание:</p>
-  <p>
-    <a href="{% url 'tasks1:new_entry' task.id %}">Добавить описание</a>
-  </p>
-  <ul>
-  {% for entry in entries %}
-    <li>
-      <p>{{ entry.deadline|date:'M d, Y' }}</p>
-      <p>{{ entry.description|linebreaks }}</p>
-      {% if entry.status != True %}
-        <input type="checkbox" disabled /> <label>Не выполнено</label>
-      {% else %}
-        <input type="checkbox" disabled checked/> <label>Выполнено</label>
-      {% endif %}
-      <p>Приоритет задачи: --{{ entry.priority }}--</p>
-      <p>
-            <a href="{% url 'tasks1:edit_entry' entry.id %}">Отредактировать</a>
-      </p>
-    </li>
-  {% empty %}
-    <li>Пока что нет никаких подзадач ¯\_(ツ)_/¯</li>
-  {% endfor %}
-  </ul>
+    <div class="row">
+        <div class="col-md-8">
+            <p>Задание: {{ task }}</p>
+            <p>Описание:</p>
+            <p>
+                <a href="{% url 'tasks1:new_entry' task.id %}" class="btn btn-primary">Добавить описание</a>
+            </p>
+            <ul class="list-unstyled">
+                {% for entry in entries %}
+                    <li>
+                        <p>{{ entry.deadline|date:'M d, Y' }}</p>
+                        <p>{{ entry.description|linebreaks }}</p>
+                        {% if entry.status %}
+                            <input type="checkbox" disabled checked /> <label>Выполнено</label>
+                        {% else %}
+                            <input type="checkbox" disabled /> <label>Не выполнено</label>
+                        {% endif %}
+                        <p>Приоритет задачи: --{{ entry.priority }}--</p>
+                        <p>
+                            <a href="{% url 'tasks1:edit_entry' entry.id %}" class="btn btn-secondary">Отредактировать</a>
+                        </p>
+                    </li>
+                {% empty %}
+                    <li>Тут пусто</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock content %}
